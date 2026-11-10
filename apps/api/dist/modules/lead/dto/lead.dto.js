@@ -8,7 +8,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { createZodDto } from 'nestjs-zod';
+import { CreateLeadSchema, LeadResponseSchema } from '@induktr/contracts';
 export var GqlLeadStatus;
 (function (GqlLeadStatus) {
     GqlLeadStatus["NEW"] = "NEW";
@@ -21,7 +22,7 @@ export var GqlLeadStatus;
 registerEnumType(GqlLeadStatus, {
     name: 'LeadStatus',
 });
-let CreateLeadInput = class CreateLeadInput {
+let CreateLeadInput = class CreateLeadInput extends createZodDto(CreateLeadSchema) {
     name;
     contact;
     budget;
@@ -32,57 +33,37 @@ let CreateLeadInput = class CreateLeadInput {
 };
 __decorate([
     Field(),
-    IsString(),
-    IsNotEmpty(),
-    MinLength(2),
-    MaxLength(100),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "name", void 0);
 __decorate([
     Field(),
-    IsString(),
-    IsNotEmpty(),
-    MinLength(3),
-    MaxLength(150),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "contact", void 0);
 __decorate([
     Field(),
-    IsString(),
-    IsNotEmpty(),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "budget", void 0);
 __decorate([
     Field(),
-    IsString(),
-    IsNotEmpty(),
-    MinLength(5),
-    MaxLength(2000),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "description", void 0);
 __decorate([
-    Field({ defaultValue: 'FULL_CYCLE_ENGINEERING' }),
-    IsString(),
-    IsOptional(),
+    Field({ defaultValue: 'FULL_CYCLE_ENGINEERING', nullable: true }),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "serviceType", void 0);
 __decorate([
     Field({ nullable: true }),
-    IsString(),
-    IsOptional(),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "referrer", void 0);
 __decorate([
     Field({ nullable: true }),
-    IsString(),
-    IsOptional(),
     __metadata("design:type", String)
 ], CreateLeadInput.prototype, "idempotencyKey", void 0);
 CreateLeadInput = __decorate([
     InputType()
 ], CreateLeadInput);
 export { CreateLeadInput };
-let LeadResponse = class LeadResponse {
+let LeadResponse = class LeadResponse extends createZodDto(LeadResponseSchema) {
     id;
     name;
     contact;

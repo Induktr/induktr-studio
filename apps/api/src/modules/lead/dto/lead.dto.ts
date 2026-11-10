@@ -1,5 +1,6 @@
 import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { createZodDto } from 'nestjs-zod';
+import { CreateLeadSchema, LeadResponseSchema } from '@induktr/contracts';
 
 export enum GqlLeadStatus {
   NEW = 'NEW',
@@ -15,51 +16,31 @@ registerEnumType(GqlLeadStatus, {
 });
 
 @InputType()
-export class CreateLeadInput {
+export class CreateLeadInput extends createZodDto(CreateLeadSchema) {
   @Field()
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(100)
   name!: string;
 
   @Field()
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(150)
   contact!: string;
 
   @Field()
-  @IsString()
-  @IsNotEmpty()
   budget!: string;
 
   @Field()
-  @IsString()
-  @IsNotEmpty()
-  @MinLength(5)
-  @MaxLength(2000)
   description!: string;
 
-  @Field({ defaultValue: 'FULL_CYCLE_ENGINEERING' })
-  @IsString()
-  @IsOptional()
+  @Field({ defaultValue: 'FULL_CYCLE_ENGINEERING', nullable: true })
   serviceType?: string;
 
   @Field({ nullable: true })
-  @IsString()
-  @IsOptional()
   referrer?: string;
 
   @Field({ nullable: true })
-  @IsString()
-  @IsOptional()
   idempotencyKey?: string;
 }
 
 @ObjectType()
-export class LeadResponse {
+export class LeadResponse extends createZodDto(LeadResponseSchema) {
   @Field()
   id!: string;
 

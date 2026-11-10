@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "studio": "Studio",
+    "store": "Store",
+    "cases": "Cases",
+    "systems": "Systems",
+    "knowledge": "Knowledge",
+    "clientHub": "Client Hub",
+    "initialize": "INITIALIZE",
+    "activeIntake": "ACTIVE INTAKE",
+    "verified": "VERIFIED",
+    "authRequired": "AUTHENTICATION REQUIRED"
+  },
+  "hero": {
+    "tagline": "Sovereign AI Systems & High-Throughput Engineering",
+    "subtext": "High-velocity autonomous multi-agent pipelines, deterministic state synchronization, and sub-15ms edge web architecture. Zero technical debt.",
+    "ctaPrimary": "Deploy System Architecture",
+    "ctaSecondary": "Inspect Technical Telemetry"
+  },
+  "auth": {
+    "sectionTag": "05 / IDENTITY VERIFICATION & SECURE GATEWAY",
+    "title": "Establish Sovereign Session",
+    "description": "Cryptographic zero-trust verification via Telegram Mini App, Database Identity Lookup, or Sovereign Key.",
+    "methodTelegram": "Telegram HMAC",
+    "methodDb": "DB Lookup",
+    "methodDemo": "Founder Demo",
+    "methodToken": "Bearer Token",
+    "verifyInDb": "VERIFY IN DATABASE →",
+    "dbExists": "USER RECORD FOUND IN DATABASE",
+    "dbNotFound": "RECORD NOT FOUND IN STUDIO DATABASE",
+    "dbQuerying": "QUERYING POSTGRESQL CLUSTER // VERIFYING USER EXISTENCE...",
+    "tgHandshakeTitle": "Cryptographic initData Handshake",
+    "tgHandshakeDesc": "Authenticates via SHA-256 HMAC signature verification with the official Induktr Studio Telegram bot. Safe, zero-password, biometric ready.",
+    "tgButton": "AUTHENTICATE VIA TELEGRAM ✈",
+    "demoFounder": "INITIALIZE AS ALEX MORGAN (EXISTS IN DB) →",
+    "demoGuest": "TEST UNREGISTERED VISITOR (ROUTE TO INTAKE) ↗",
+    "tokenLabel": "BEARER SESSION TOKEN",
+    "tokenButton": "ATTACH SESSION TOKEN →",
+    "footerSecurity": "HMAC-SHA256 • ZERO PASSWORD • EXPIRATION: 30 DAYS"
+  },
+  "intake": {
+    "title": "Engineering Brief Intake Protocol",
+    "onboardingBadge": "ONBOARDING",
+    "onboardingNotice": "Identity not found in database. Submit brief below to automatically provision your sovereign client profile and session.",
+    "nameLabel": "FULL NAME / ENTITY",
+    "contactLabel": "CONTACT (TELEGRAM / EMAIL)",
+    "budgetLabel": "PROJECT BUDGET (USD)",
+    "descriptionLabel": "TECHNICAL SPECIFICATION & BRIEF",
+    "serviceTypeLabel": "SERVICE CONTOUR",
+    "submitButton": "TRANSMIT INTAKE BRIEF →"
+  },
+  "clientHub": {
+    "viewportLabel": "VIEWPORT DISPATCH:",
+    "desktop": "Desktop Workspace",
+    "miniApp": "Telegram Mini App (Phone)",
+    "signOut": "Sign out ⎋",
+    "synced": "ALL SYSTEMS SYNCED"
+  },
+  "telemetry": {
+    "fpsLocked": "60 FPS LOCKED • BUN 1.4",
+    "statusLive": "TELEMETRY LINK ACTIVE [200 OK]",
+    "latencyMetric": "Sub-15ms Anycast Edge Latency",
+    "idempotencyHint": "Mutation secured by cryptographic idempotency key"
+  }
+}

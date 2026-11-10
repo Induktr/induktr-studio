@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "studio": "Estudio",
+    "store": "Tienda",
+    "cases": "Casos",
+    "systems": "Sistemas",
+    "knowledge": "Conocimiento",
+    "clientHub": "Centro de Cliente",
+    "initialize": "INICIALIZAR",
+    "activeIntake": "SOLICITUD ACTIVA",
+    "verified": "VERIFICADO",
+    "authRequired": "AUTENTICACIÓN REQUERIDA"
+  },
+  "hero": {
+    "tagline": "Sistemas Autónomos de IA e Ingeniería de Alta Capacidad",
+    "subtext": "Canalizaciones multiagente autónomas de alta velocidad, sincronización determinista de estado y arquitectura web perimetral con latencia sub-15ms. Cero deuda técnica.",
+    "ctaPrimary": "Desplegar Arquitectura",
+    "ctaSecondary": "Inspeccionar Telemetría"
+  },
+  "auth": {
+    "sectionTag": "05 / VERIFICACIÓN DE IDENTIDAD Y PUERTA DE ENLACE",
+    "title": "Establecer Sesión Soberana",
+    "description": "Verificación criptográfica de confianza cero mediante Telegram Mini App, consulta en base de datos o clave soberana.",
+    "methodTelegram": "Telegram HMAC",
+    "methodDb": "Búsqueda en BD",
+    "methodDemo": "Founder Demo",
+    "methodToken": "Token Bearer",
+    "verifyInDb": "VERIFICAR EN BASE DE DATOS →",
+    "dbExists": "REGISTRO DE USUARIO ENCONTRADO EN LA BD",
+    "dbNotFound": "REGISTRO NO ENCONTRADO EN LA BASE DE DATOS",
+    "dbQuerying": "CONSULTANDO CLÚSTER POSTGRESQL // VERIFICANDO EXISTENCIA...",
+    "tgHandshakeTitle": "Protocolo criptográfico initData",
+    "tgHandshakeDesc": "Autenticación mediante firma SHA-256 HMAC con el bot oficial de Induktr Studio. Seguro, sin contraseña, listo para biometría.",
+    "tgButton": "AUTENTICAR VÍA TELEGRAM ✈",
+    "demoFounder": "INICIALIZAR COMO ALEX MORGAN (EXISTE EN BD) →",
+    "demoGuest": "PROBAR VISITANTE NO REGISTRADO (A ONBOARDING) ↗",
+    "tokenLabel": "TOKEN DE SESIÓN BEARER",
+    "tokenButton": "ADJUNTAR TOKEN DE SESIÓN →",
+    "footerSecurity": "HMAC-SHA256 • SIN CONTRASEÑAS • EXPIRACIÓN: 30 DÍAS"
+  },
+  "intake": {
+    "title": "Protocolo de Admisión de Brief Técnico",
+    "onboardingBadge": "ONBOARDING",
+    "onboardingNotice": "Identidad no encontrada en la base de datos. Envíe el brief a continuación para aprovisionar su perfil de cliente soberano.",
+    "nameLabel": "NOMBRE COMPLETO / ENTIDAD",
+    "contactLabel": "CONTACTO (TELEGRAM / EMAIL)",
+    "budgetLabel": "PRESUPUESTO DEL PROYECTO (USD)",
+    "descriptionLabel": "ESPECIFICACIÓN TÉCNICA Y BRIEF",
+    "serviceTypeLabel": "CONTORNO DE SERVICIO",
+    "submitButton": "TRANSMITIR BRIEF TÉCNICO →"
+  },
+  "clientHub": {
+    "viewportLabel": "DISPATCH DE VISOR:",
+    "desktop": "Espacio de Trabajo de Escritorio",
+    "miniApp": "Telegram Mini App (Móvil)",
+    "signOut": "Cerrar sesión ⎋",
+    "synced": "TODOS LOS SISTEMAS SINCRONIZADOS"
+  },
+  "telemetry": {
+    "fpsLocked": "60 FPS FIJOS • BUN 1.4",
+    "statusLive": "ENLACE TELEMÉTRICO ACTIVO [200 OK]",
+    "latencyMetric": "Latencia de Borde Sub-15ms",
+    "idempotencyHint": "Mutación blindada por clave de idempotencia"
+  }
+}

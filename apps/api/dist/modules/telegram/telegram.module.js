@@ -5,11 +5,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Module } from '@nestjs/common';
+import { PrismaModule } from '../prisma/prisma.module';
+import { TelegramController } from './telegram.controller';
 import { TelegramService } from './telegram.service';
 let TelegramModule = class TelegramModule {
 };
 TelegramModule = __decorate([
     Module({
+        imports: [PrismaModule],
+        controllers: [TelegramController],
         providers: [TelegramService],
         exports: [TelegramService],
     })

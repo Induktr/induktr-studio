@@ -11,7 +11,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { LeadResponse } from './dto/lead.dto';
+import { Throttle } from '@nestjs/throttler';
+import { CreateLeadInput, LeadResponse } from './dto/lead.dto';
+import { LeadService } from './lead.service';
 let LeadResolver = class LeadResolver {
     leadService;
     constructor(leadService) {
@@ -19,6 +21,9 @@ let LeadResolver = class LeadResolver {
     }
     async getLeads() {
         return this.leadService.getAllLeads();
+    }
+    async getLead(id) {
+        return this.leadService.getLeadById(id);
     }
     async submitLead(input) {
         return this.leadService.submitLead(input);
@@ -31,17 +36,29 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LeadResolver.prototype, "getLeads", null);
 __decorate([
+    Query(() => LeadResponse, {
+        name: 'lead',
+        nullable: true,
+        description: 'Retrieve single lead by ID or slug/idempotencyKey',
+    }),
+    __param(0, Args('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], LeadResolver.prototype, "getLead", null);
+__decorate([
+    Throttle({ default: { limit: 5, ttl: 60000 } }),
     Mutation(() => LeadResponse, {
         name: 'submitLead',
-        description: 'Submit intake lead with guaranteed idempotency',
+        description: 'Submit intake lead with guaranteed idempotency and rate-limiting',
     }),
     __param(0, Args('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Function]),
+    __metadata("design:paramtypes", [CreateLeadInput]),
     __metadata("design:returntype", Promise)
 ], LeadResolver.prototype, "submitLead", null);
 LeadResolver = __decorate([
     Resolver(() => LeadResponse),
-    __metadata("design:paramtypes", [Function])
+    __metadata("design:paramtypes", [LeadService])
 ], LeadResolver);
 export { LeadResolver };

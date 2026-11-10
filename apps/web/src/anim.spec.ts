@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { AffineMatrixEngine } from './shared/lib/anim/matrix-engine';
+import { createAffineMatrixEngine } from './shared/lib/anim/matrix-engine';
 import { scheduleLowPriorityTask } from './shared/lib/anim/scheduler';
 
-describe('Affine Matrix & Linear Algebra Engine (Vector Transform)', () => {
+describe('Functional Affine Matrix & Linear Algebra Engine (Vector Transform)', () => {
   it('initializes identity matrix [1, 0, 0, 1, 0, 0]', () => {
-    const engine = new AffineMatrixEngine(10);
+    const engine = createAffineMatrixEngine(10);
     const m = engine.getMatrix(0);
     expect(m).toEqual([1, 0, 0, 1, 0, 0]);
   });
 
   it('correctly calculates translation and scale transformations', () => {
-    const engine = new AffineMatrixEngine(10);
+    const engine = createAffineMatrixEngine(10);
     // id 0: translate(50, 100), scale(2, 3), rotation 0
     engine.setTransform(0, 50, 100, 2, 3, 0);
     const m = engine.getMatrix(0);
@@ -23,7 +23,7 @@ describe('Affine Matrix & Linear Algebra Engine (Vector Transform)', () => {
   });
 
   it('correctly computes 90-degree basis vector rotation', () => {
-    const engine = new AffineMatrixEngine(10);
+    const engine = createAffineMatrixEngine(10);
     const rad90 = Math.PI / 2;
     engine.setTransform(1, 0, 0, 1, 1, rad90);
     const m = engine.getMatrix(1);
@@ -34,7 +34,7 @@ describe('Affine Matrix & Linear Algebra Engine (Vector Transform)', () => {
   });
 
   it('correctly multiplies two affine transformation matrices', () => {
-    const engine = new AffineMatrixEngine(10);
+    const engine = createAffineMatrixEngine(10);
     // Identity * Translation(10, 20)
     engine.multiply(2, 1, 0, 0, 1, 10, 20);
     const m = engine.getMatrix(2);

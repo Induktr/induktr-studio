@@ -12,45 +12,60 @@
  * [5] ty : Translation Y
  */
 
-export class AffineMatrixEngine {
-  private readonly buffer: Float32Array;
-  private readonly maxEntities: number;
-
-  constructor(maxEntities = 256) {
-    this.maxEntities = maxEntities;
-    // Flat contiguous memory allocation: 6 floats (24 bytes) per entity
-    this.buffer = new Float32Array(maxEntities * 6);
-    this.resetAll();
-  }
-
-  /**
-   * Reset all entities to the 2D Identity Matrix:
-   * [1, 0, 0, 1, 0, 0] -> matrix(1, 0, 0, 1, 0, 0)
-   */
-  resetAll(): void {
-    for (let i = 0; i < this.maxEntities; i++) {
-      const o = i * 6;
-      this.buffer[o + 0] = 1; // a
-      this.buffer[o + 1] = 0; // b
-      this.buffer[o + 2] = 0; // c
-      this.buffer[o + 3] = 1; // d
-      this.buffer[o + 4] = 0; // tx
-      this.buffer[o + 5] = 0; // ty
-    }
-  }
-
-  /**
-   * Set affine transformation using basis vector decomposition
-   */
-  setTransform(
+export interface AffineMatrixEngine {
+  readonly resetAll: () => void;
+  readonly setTransform: (
     id: number,
     tx: number,
     ty: number,
     scaleX: number,
     scaleY: number,
-    radians: number
-  ): void {
-    if (id < 0 || id >= this.maxEntities) return;
+    radians: number,
+  ) => void;
+  readonly multiply: (
+    id: number,
+    ma: number,
+    mb: number,
+    mc: number,
+    md: number,
+    mtx: number,
+    mty: number,
+  ) => void;
+  readonly getMatrix: (id: number) => readonly [number, number, number, number, number, number];
+  readonly applyToElement: (id: number, element: HTMLElement) => void;
+}
+
+/**
+ * Functional Affine Matrix Engine Factory (Zero-Allocation Closure)
+ * Replaces class with pure lexical closure and typed interfaces.
+ */
+export function createAffineMatrixEngine(maxEntities = 256): AffineMatrixEngine {
+  // Flat contiguous memory allocation: 6 floats (24 bytes) per entity
+  const buffer = new Float32Array(maxEntities * 6);
+
+  const resetAll = (): void => {
+    for (let i = 0; i < maxEntities; i++) {
+      const o = i * 6;
+      buffer[o + 0] = 1; // a
+      buffer[o + 1] = 0; // b
+      buffer[o + 2] = 0; // c
+      buffer[o + 3] = 1; // d
+      buffer[o + 4] = 0; // tx
+      buffer[o + 5] = 0; // ty
+    }
+  };
+
+  resetAll();
+
+  const setTransform = (
+    id: number,
+    tx: number,
+    ty: number,
+    scaleX: number,
+    scaleY: number,
+    radians: number,
+  ): void => {
+    if (id < 0 || id >= maxEntities) return;
     const o = id * 6;
     const cos = Math.cos(radians);
     const sin = Math.sin(radians);
@@ -58,67 +73,72 @@ export class AffineMatrixEngine {
     // Transform basis vectors:
     // i' = scaleX * [cos, sin]
     // j' = scaleY * [-sin, cos]
-    this.buffer[o + 0] = cos * scaleX;
-    this.buffer[o + 1] = sin * scaleX;
-    this.buffer[o + 2] = -sin * scaleY;
-    this.buffer[o + 3] = cos * scaleY;
-    this.buffer[o + 4] = tx;
-    this.buffer[o + 5] = ty;
-  }
+    buffer[o + 0] = cos * scaleX;
+    buffer[o + 1] = sin * scaleX;
+    buffer[o + 2] = -sin * scaleY;
+    buffer[o + 3] = cos * scaleY;
+    buffer[o + 4] = tx;
+    buffer[o + 5] = ty;
+  };
 
-  /**
-   * Multiply 2 matrices: M_target = M_target x M_delta
-   * Pure matrix multiplication without heap object allocations
-   */
-  multiply(id: number, ma: number, mb: number, mc: number, md: number, mtx: number, mty: number): void {
-    if (id < 0 || id >= this.maxEntities) return;
+  const multiply = (
+    id: number,
+    ma: number,
+    mb: number,
+    mc: number,
+    md: number,
+    mtx: number,
+    mty: number,
+  ): void => {
+    if (id < 0 || id >= maxEntities) return;
     const o = id * 6;
-    const a = this.buffer[o + 0] ?? 1;
-    const b = this.buffer[o + 1] ?? 0;
-    const c = this.buffer[o + 2] ?? 0;
-    const d = this.buffer[o + 3] ?? 1;
-    const tx = this.buffer[o + 4] ?? 0;
-    const ty = this.buffer[o + 5] ?? 0;
+    const a = buffer[o + 0] ?? 1;
+    const b = buffer[o + 1] ?? 0;
+    const c = buffer[o + 2] ?? 0;
+    const d = buffer[o + 3] ?? 1;
+    const tx = buffer[o + 4] ?? 0;
+    const ty = buffer[o + 5] ?? 0;
 
     // Compute affine composition:
-    this.buffer[o + 0] = a * ma + c * mb;
-    this.buffer[o + 1] = b * ma + d * mb;
-    this.buffer[o + 2] = a * mc + c * md;
-    this.buffer[o + 3] = b * mc + d * md;
-    this.buffer[o + 4] = a * mtx + c * mty + tx;
-    this.buffer[o + 5] = b * mtx + d * mty + ty;
-  }
+    buffer[o + 0] = a * ma + c * mb;
+    buffer[o + 1] = b * ma + d * mb;
+    buffer[o + 2] = a * mc + c * md;
+    buffer[o + 3] = b * mc + d * md;
+    buffer[o + 4] = a * mtx + c * mty + tx;
+    buffer[o + 5] = b * mtx + d * mty + ty;
+  };
 
-  /**
-   * Read raw matrix parameters directly from contiguous buffer
-   */
-  getMatrix(id: number): readonly [number, number, number, number, number, number] {
+  const getMatrix = (id: number): readonly [number, number, number, number, number, number] => {
     const o = id * 6;
-    const a = this.buffer[o + 0] ?? 1;
-    const b = this.buffer[o + 1] ?? 0;
-    const c = this.buffer[o + 2] ?? 0;
-    const d = this.buffer[o + 3] ?? 1;
-    const tx = this.buffer[o + 4] ?? 0;
-    const ty = this.buffer[o + 5] ?? 0;
+    const a = buffer[o + 0] ?? 1;
+    const b = buffer[o + 1] ?? 0;
+    const c = buffer[o + 2] ?? 0;
+    const d = buffer[o + 3] ?? 1;
+    const tx = buffer[o + 4] ?? 0;
+    const ty = buffer[o + 5] ?? 0;
     return [a, b, c, d, tx, ty] as const;
-  }
+  };
 
-  /**
-   * Apply calculated matrix directly to HTML element's GPU compositor transform
-   * Pure transform — strictly bypasses browser Layout / Reflow pipeline.
-   */
-  applyToElement(id: number, element: HTMLElement): void {
+  const applyToElement = (id: number, element: HTMLElement): void => {
     const o = id * 6;
-    const a = this.buffer[o + 0] ?? 1;
-    const b = this.buffer[o + 1] ?? 0;
-    const c = this.buffer[o + 2] ?? 0;
-    const d = this.buffer[o + 3] ?? 1;
-    const tx = this.buffer[o + 4] ?? 0;
-    const ty = this.buffer[o + 5] ?? 0;
+    const a = buffer[o + 0] ?? 1;
+    const b = buffer[o + 1] ?? 0;
+    const c = buffer[o + 2] ?? 0;
+    const d = buffer[o + 3] ?? 1;
+    const tx = buffer[o + 4] ?? 0;
+    const ty = buffer[o + 5] ?? 0;
 
     element.style.transform = `matrix(${a},${b},${c},${d},${tx},${ty})`;
-  }
+  };
+
+  return {
+    resetAll,
+    setTransform,
+    multiply,
+    getMatrix,
+    applyToElement,
+  };
 }
 
 // Global Singleton Engine for high performance across UI slices
-export const globalMatrixEngine = new AffineMatrixEngine(512);
+export const globalMatrixEngine = createAffineMatrixEngine(512);

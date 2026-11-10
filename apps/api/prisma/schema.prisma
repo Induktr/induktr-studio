@@ -4,6 +4,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 enum LeadStatus {
@@ -33,6 +34,12 @@ enum OrderStatus {
   PAID
   DELIVERED
   CANCELLED
+}
+
+enum MilestoneStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
 }
 
 model Lead {
@@ -67,15 +74,25 @@ model User {
 }
 
 model Product {
-  id          String      @id @default(uuid())
-  slug        String      @unique
-  title       String
-  type        ProductType
-  priceUsd    Float
-  description String
-  purchases   Purchase[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id             String      @id @default(uuid())
+  slug           String      @unique
+  title          String
+  type           ProductType
+  priceUsd       Float
+  description    String
+  tier           String      @default("CORE")
+  badge          String      @default("STANDARD")
+  version        String      @default("1.0.0")
+  fileSize       String?
+  componentCount Int?
+  features       Json        @default("[]")
+  artifactKey    String      @default("")
+  isActive       Boolean     @default(true)
+  purchases      Purchase[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([isActive])
 }
 
 model Purchase {
@@ -94,17 +111,72 @@ model Purchase {
 }
 
 model CustomOrder {
-  id         String      @id @default(uuid())
-  userId     String
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title      String
-  budgetUsd  Float
-  status     OrderStatus @default(PENDING)
-  milestones Json        @default("[]")
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id             String      @id @default(uuid())
+  orderNumber    String      @unique @default(uuid())
+  userId         String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String
+  budgetUsd      Float
+  status         OrderStatus @default(PENDING)
+  sprint         String?
+  deliveryDate   DateTime?
+  nextReviewDate DateTime?
+  milestones     Milestone[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 
   @@index([userId])
+}
+
+model Milestone {
+  id          String          @id @default(uuid())
+  orderId     String
+  order       CustomOrder     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  step        Int
+  title       String
+  description String
+  status      MilestoneStatus @default(PENDING)
+  completedAt DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@unique([orderId, step])
+  @@index([orderId])
+}
+
+model SystemShowcase {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  number      String
+  category    String
+  title       String
+  tagline     String
+  description String
+  topology    Json
+  metrics     Json
+  recentLog   String
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@index([isActive])
+}
+
+model NotificationLog {
+  id           String   @id @default(uuid())
+  channel      String
+  recipient    String
+  payload      Json
+  delivered    Boolean  @default(false)
+  attempts     Int      @default(0)
+  errorMessage String?
+  createdAt    DateTime @default(now())
+
+  @@index([channel])
+  @@index([recipient])
+  @@index([delivered])
 }
 
 model Session {

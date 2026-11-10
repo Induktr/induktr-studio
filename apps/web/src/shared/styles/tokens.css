@@ -1,29 +1,74 @@
-:root {
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-card: var(--bg-card);
+  --color-bg-card-hover: var(--bg-card-hover);
+  --color-bg-glass: var(--bg-glass);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-dim: var(--text-dim);
+
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-cyan-solid: var(--accent-cyan-solid);
+  --color-accent-cyan-glow: var(--accent-cyan-glow);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-green: var(--accent-green);
+  --color-accent-danger: var(--accent-danger);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-card: var(--border-card);
+  --color-border-focus: var(--border-focus);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+:root,
+[data-theme='dark'] {
   /* =================================================================
-     INDUKTR OKLCH DESIGN TOKENS (APCA / High Contrast Ergonomics)
+     INDUKTR OKLCH DESIGN TOKENS (Figma High-Performance Spec)
      ================================================================= */
-  --bg-primary: oklch(0.12 0.01 260); /* Deep graphite base */
-  --bg-surface: oklch(0.16 0.015 260); /* Elevated card layer */
-  --bg-glass: oklch(0.18 0.02 260 / 0.7); /* Frosted blur backdrop */
+  --bg-primary: #0a0d14; /* Deep tactical void */
+  --bg-surface: #0f131c; /* Elevated container layer */
+  --bg-card: #141924; /* Card & module background */
+  --bg-card-hover: #19202e;
+  --bg-glass: rgba(10, 13, 20, 0.85);
 
-  --text-primary: oklch(0.96 0.01 260); /* Razor-sharp light */
-  --text-secondary: oklch(0.72 0.02 260); /* Low-fatigue muted */
-  --text-tertiary: oklch(0.48 0.015 260); /* Structural guidelines */
+  --text-primary: #f8fafc; /* Razor sharp white */
+  --text-secondary: #94a3b8; /* Muted slate */
+  --text-tertiary: #64748b; /* Structural labels */
+  --text-dim: #475569;
 
-  --accent-cyan: oklch(0.78 0.16 210); /* Quantum Electric Cyan */
-  --accent-neon: oklch(0.85 0.18 150); /* High-Performance Neon */
-  --accent-danger: oklch(0.65 0.22 25); /* Critical Alert */
+  --accent-cyan: #38bdf8; /* Quantum Cyan */
+  --accent-cyan-solid: #26b5f4; /* Solid action button cyan */
+  --accent-cyan-glow: rgba(56, 189, 248, 0.25);
+  --accent-purple: #c084fc; /* Orchestrator Purple */
+  --accent-green: #4ade80; /* System Nominal Green */
+  --accent-danger: #f87171;
 
-  --border-subtle: oklch(0.24 0.02 260);
-  --border-focus: oklch(0.78 0.16 210 / 0.8);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-focus: #38bdf8;
 
-  /* Fluid Typography via CSS Clamp */
-  --font-hero: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  --font-h1: clamp(2rem, 3.5vw + 0.8rem, 3.25rem);
-  --font-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
-  --font-body: clamp(0.95rem, 0.8vw + 0.75rem, 1.125rem);
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  /* 8px Modular Spacing */
+  --font-hero: clamp(2.4rem, 4.2vw + 0.5rem, 4.25rem);
+  --font-h1: clamp(1.8rem, 3vw + 0.5rem, 2.75rem);
+  --font-h2: clamp(1.3rem, 2vw + 0.4rem, 1.85rem);
+  --font-body: clamp(0.9rem, 0.5vw + 0.75rem, 1.05rem);
+
+  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -32,15 +77,48 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+}
+
+[data-theme='light'] {
+  --bg-primary: #f8fafc;
+  --bg-surface: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-glass: rgba(248, 250, 252, 0.9);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-dim: #94a3b8;
+
+  --accent-cyan: #0284c7;
+  --accent-cyan-solid: #0284c7;
+  --accent-cyan-glow: rgba(2, 132, 199, 0.2);
+  --accent-purple: #9333ea;
+  --accent-green: #16a34a;
+  --accent-danger: #dc2626;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-card: rgba(0, 0, 0, 0.12);
+  --border-focus: #0284c7;
 }
 
 body {
   margin: 0;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  overflow-x: hidden;
 }
 
 *,
@@ -48,3 +126,90 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Global Utility Classes */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 25px var(--accent-cyan-glow);
+}
+
+.border-subtle {
+  border: 1px solid var(--border-subtle);
+}
+
+.card-layer {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(380px);
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink-cursor 1s infinite steps(1);
+}
+
+/* =================================================================
+   RTL SPATIAL PHYSICS & ARABIC TYPOGRAPHY (doc-loc1n.md §3)
+   ================================================================= */
+[dir="rtl"] {
+  --font-sans: 'IBM Plex Sans Arabic', 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.65;
+  letter-spacing: normal !important;
+}
+
+[dir="rtl"] .icon-directional {
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+

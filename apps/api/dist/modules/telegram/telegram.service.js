@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var TelegramService_1;
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 let TelegramService = TelegramService_1 = class TelegramService {
     config;
     logger = new Logger(TelegramService_1.name);
@@ -19,22 +20,27 @@ let TelegramService = TelegramService_1 = class TelegramService {
         this.botToken = this.config.get('TELEGRAM_BOT_TOKEN');
         this.chatId = this.config.get('TELEGRAM_CHAT_ID');
     }
-    async sendLeadNotification(lead, retryCount = 3) {
-        if (!this.botToken || !this.chatId) {
-            this.logger.warn('TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. Emitting stub notification.');
-            return true;
-        }
-        const message = [
+    buildNotificationMessage(lead) {
+        const lines = [
             '⚡ <b>НОВАЯ ЗАЯВКА INDUKTR STUDIO v2.0</b>',
             '──────────────────────────',
             `👤 <b>Клиент:</b> ${this.escapeHtml(lead.name)}`,
             `📞 <b>Контакт:</b> ${this.escapeHtml(lead.contact)}`,
             `💰 <b>Бюджет:</b> ${this.escapeHtml(lead.budget)}`,
             `🛠 <b>Направление:</b> ${this.escapeHtml(lead.serviceType)}`,
-            `📝 <b>Описание:</b>\n<blockquote>${this.escapeHtml(lead.description)}</blockquote>`,
-            '──────────────────────────',
-            `🆔 <code>${lead.id}</code> | 🕒 <i>${new Date().toISOString()}</i>`,
-        ].join('\n');
+        ];
+        if (lead.referrer) {
+            lines.push(`🌐 <b>Источник (Referrer):</b> ${this.escapeHtml(lead.referrer)}`);
+        }
+        lines.push(`📝 <b>Описание:</b>\n<blockquote>${this.escapeHtml(lead.description)}</blockquote>`, '──────────────────────────', `🏷 #lead #induktr #crm #${this.slugify(lead.serviceType)}`, `🆔 <code>${lead.id}</code> | 🕒 <i>${new Date().toISOString()}</i>`);
+        return lines.join('\n');
+    }
+    async sendLeadNotification(lead, retryCount = 3) {
+        if (!this.botToken || !this.chatId) {
+            this.logger.warn('TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is not configured. Emitting stub notification.');
+            return true;
+        }
+        const message = this.buildNotificationMessage(lead);
         const url = `https://api.telegram.org/bot${this.botToken}/sendMessage`;
         for (let attempt = 1; attempt <= retryCount; attempt++) {
             try {
@@ -68,9 +74,12 @@ let TelegramService = TelegramService_1 = class TelegramService {
     escapeHtml(text) {
         return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
+    slugify(text) {
+        return text.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    }
 };
 TelegramService = TelegramService_1 = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [Function])
+    __metadata("design:paramtypes", [ConfigService])
 ], TelegramService);
 export { TelegramService };

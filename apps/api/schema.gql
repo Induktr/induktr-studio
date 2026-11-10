@@ -1,0 +1,227 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  token: String!
+  user: UserResponse!
+}
+
+type CheckUserResponse {
+  exists: Boolean!
+  user: UserResponse
+}
+
+input CreateCustomOrderInput {
+  budgetUsd: Float!
+  title: String!
+}
+
+input CreateLeadInput {
+  budget: String!
+  contact: String!
+  description: String!
+  idempotencyKey: String
+  name: String!
+  referrer: String
+  serviceType: String = "FULL_CYCLE_ENGINEERING"
+}
+
+type CustomOrderResponse {
+  budgetUsd: Float!
+  createdAt: String!
+  deliveryDate: String
+  id: ID!
+  milestones: [MilestoneResponse!]!
+  nextReviewDate: String
+  orderNumber: String
+  sprint: String
+  status: OrderStatus!
+  title: String!
+  userId: ID!
+}
+
+input InitPurchaseInput {
+  productId: ID!
+}
+
+type LeadResponse {
+  budget: String!
+  contact: String!
+  createdAt: String!
+  description: String!
+  id: String!
+  name: String!
+  status: LeadStatus!
+}
+
+enum LeadStatus {
+  COMPLETED
+  CONTACTED
+  IN_PROGRESS
+  NEW
+  QUALIFIED
+  REJECTED
+}
+
+type MilestoneResponse {
+  completedAt: String
+  createdAt: String
+  description: String
+  id: ID!
+  status: MilestoneStatus!
+  step: Int!
+  title: String!
+  updatedAt: String
+}
+
+enum MilestoneStatus {
+  COMPLETED
+  IN_PROGRESS
+  PENDING
+}
+
+type Mutation {
+  """Cryptographic Telegram Mini App / WebApp authentication"""
+  authenticateWithTelegram(input: TelegramAuthInput!): AuthResponse!
+
+  """Create a custom studio engineering order"""
+  createCustomOrder(input: CreateCustomOrderInput!): CustomOrderResponse!
+
+  """Initialize digital product purchase"""
+  initPurchase(input: InitPurchaseInput!): PurchaseResponse!
+
+  """
+  Instant demo authorization as Founder Alex Morgan with a real database session
+  """
+  loginAsDemoFounder: AuthResponse!
+
+  """Register a new user identity in the Studio database"""
+  registerUser(input: RegisterUserInput!): AuthResponse!
+
+  """Submit intake lead with guaranteed idempotency and rate-limiting"""
+  submitLead(input: CreateLeadInput!): LeadResponse!
+}
+
+enum OrderStatus {
+  CANCELLED
+  DELIVERED
+  PAID
+  PENDING
+}
+
+type ProductResponse {
+  artifactKey: String
+  badge: String
+  componentCount: Int
+  createdAt: String!
+  description: String!
+  features: [String!]
+  fileSize: String
+  id: ID!
+  isActive: Boolean
+  priceUsd: Float!
+  slug: String!
+  tier: String
+  title: String!
+  type: ProductType!
+  version: String
+}
+
+enum ProductType {
+  CHEATSHEET_HIGH_LEVEL
+  CHEATSHEET_LOW_LEVEL
+  CONSULTATION_AUDIT
+  UI_KIT
+}
+
+type PurchaseResponse {
+  amountUsd: Float!
+  createdAt: String!
+  downloadUrl: String
+  id: ID!
+  product: ProductResponse
+  productId: ID!
+  status: OrderStatus!
+  userId: ID!
+}
+
+type Query {
+  """
+  Check whether a user exists in the Studio PostgreSQL database by ID, Telegram ID, username, or email
+  """
+  checkUserExists(identifier: String!): CheckUserResponse!
+
+  """
+  Generates a cryptographically valid Telegram initData string using the active Bot Token for local/staging verification
+  """
+  generateDevTelegramInitData(firstName: String, lastName: String, userId: String, username: String): String!
+
+  """Generate presigned download URL for paid purchase"""
+  getDigitalDownloadUrl(purchaseId: String!): String!
+
+  """Retrieve single lead by ID or slug/idempotencyKey"""
+  lead(id: String!): LeadResponse
+
+  """Retrieve latest CRM leads"""
+  leads: [LeadResponse!]!
+
+  """Get current authenticated user profile"""
+  me: UserResponse!
+
+  """Retrieve user custom orders"""
+  myOrders: [CustomOrderResponse!]!
+
+  """Retrieve user digital purchases"""
+  myPurchases: [PurchaseResponse!]!
+
+  """List available studio digital products"""
+  products: [ProductResponse!]!
+
+  """List active studio system showcases and benchmarks"""
+  systemShowcases: [SystemShowcaseResponse!]!
+}
+
+input RegisterUserInput {
+  email: String
+  firstName: String
+  telegramId: String
+  username: String
+}
+
+type SystemShowcaseResponse {
+  category: String!
+  createdAt: String!
+  description: String!
+  id: ID!
+  isActive: Boolean!
+  metrics: String!
+  number: String!
+  recentLog: String!
+  slug: String!
+  sortOrder: Int!
+  tagline: String!
+  title: String!
+  topology: String!
+  updatedAt: String!
+}
+
+input TelegramAuthInput {
+  initData: String!
+}
+
+type UserResponse {
+  createdAt: String!
+  email: String
+  firstName: String
+  id: ID!
+  role: UserRole!
+  telegramId: String
+  username: String
+}
+
+enum UserRole {
+  ADMIN
+  CLIENT
+  STUDIO_LEAD
+}

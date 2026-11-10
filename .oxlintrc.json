@@ -16,13 +16,15 @@
     "no-await-in-loop": "off",
     "react/react-in-jsx-scope": "off",
     "typescript/no-explicit-any": "error",
-    "typescript/no-extraneous-class": "off"
+    "typescript/no-extraneous-class": "off",
+    "vitest/require-mock-type-parameters": "off"
   },
   "ignorePatterns": [
     "**/dist/**",
     "**/node_modules/**",
     "**/.next/**",
     "**/*.legacy.*",
-    "coverage/**"
+    "coverage/**",
+    "**/generated/**"
   ]
 }

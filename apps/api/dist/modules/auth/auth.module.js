@@ -5,13 +5,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Module } from '@nestjs/common';
+import { PrismaModule } from '../prisma/prisma.module';
+import { AuthResolver } from './auth.resolver';
+import { AuthService } from './auth.service';
 import { TelegramAuthGuard } from './telegram-auth.guard';
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     Module({
-        providers: [TelegramAuthGuard],
-        exports: [TelegramAuthGuard],
+        imports: [PrismaModule],
+        providers: [AuthService, AuthResolver, TelegramAuthGuard],
+        exports: [AuthService, TelegramAuthGuard],
     })
 ], AuthModule);
 export { AuthModule };

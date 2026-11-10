@@ -1,10 +1,19 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Induktr Studio v2.0 — High-Performance Digital Engine</title>
+    <!-- Anti-FOUC Zero-Flash Theme Initializer -->
+    <script>
+      (function() {
+        try {
+          const theme = localStorage.getItem('induktr-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
     <!-- React Scan: Dev Mode Render Profiling (Budget < 16.6ms / 60 FPS) -->
     <script>
       if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -14,7 +23,7 @@
       }
     </script>
   </head>
-  <body class="bg-[#0a0a0c] text-[#f4f4f6] antialiased selection:bg-[#38bdf8] selection:text-black">
+  <body class="antialiased selection:bg-[#38bdf8] selection:text-black">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

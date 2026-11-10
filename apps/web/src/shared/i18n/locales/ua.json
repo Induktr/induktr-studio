@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "studio": "Студія",
+    "store": "Магазин",
+    "cases": "Кейси",
+    "systems": "Системи",
+    "knowledge": "База знань",
+    "clientHub": "Кабінет клієнта",
+    "initialize": "ІНІЦІАЛІЗАЦІЯ",
+    "activeIntake": "АКТИВНИЙ ЗАПИС",
+    "verified": "ВЕРИФІКОВАНО",
+    "authRequired": "ПОТРІБНА АВТОРИЗАЦІЯ"
+  },
+  "hero": {
+    "tagline": "Суверенні AI-Системи та Високонавантажена Інженерія",
+    "subtext": "Проєктування автономних контурів, детермінована синхронізація стану та надшвидка архітектура із затримкою <15мс на Edge. Нульовий технічний борг.",
+    "ctaPrimary": "Розгорнути Архітектуру",
+    "ctaSecondary": "Оглянути Телеметрію"
+  },
+  "auth": {
+    "sectionTag": "05 / ВЕРИФІКАЦІЯ ОСОБИ ТА ЗАХИЩЕНИЙ ШЛЮЗ",
+    "title": "Встановити Суверенну Сесію",
+    "description": "Криптографічна верифікація Zero-Trust через Telegram Mini App, пошук у базі даних або суверенний ключ.",
+    "methodTelegram": "Telegram HMAC",
+    "methodDb": "Пошук у БД",
+    "methodDemo": "Founder Demo",
+    "methodToken": "Bearer Токен",
+    "verifyInDb": "ПЕРЕВІРИТИ В БАЗІ ДАНИХ →",
+    "dbExists": "ЗАПИС КОРИСТУВАЧА ЗНАЙДЕНО В БД",
+    "dbNotFound": "ЗАПИС НЕ ЗНАЙДЕНО В БАЗІ ДАНИХ СТУДІЇ",
+    "dbQuerying": "ЗАПИТ ДО КЛАСТЕРА POSTGRESQL // ПЕРЕВІРКА ПРИСУТНОСТІ...",
+    "tgHandshakeTitle": "Криптографічне рукостискання initData",
+    "tgHandshakeDesc": "Автентифікація через підпис SHA-256 HMAC офіційним ботом Induktr Studio. Безпечно, без паролів, біометрична готовність.",
+    "tgButton": "АВТОРИЗУВАТИСЯ ЧЕРЕЗ TELEGRAM ✈",
+    "demoFounder": "ІНІЦІАЛІЗУВАТИ ЯК ALEX MORGAN (Є В БД) →",
+    "demoGuest": "ТЕСТУВАТИ НЕЗАРЕЄСТРОВАНОГО (ДО ОНБОРДИНГУ) ↗",
+    "tokenLabel": "СЕСІЙНИЙ ТОКЕН BEARER",
+    "tokenButton": "ПРИКРІПИТИ ТОКЕН СЕСІЇ →",
+    "footerSecurity": "HMAC-SHA256 • БЕЗ ПАРОЛІВ • ТЕРМІН ДІЇ: 30 ДНІВ"
+  },
+  "intake": {
+    "title": "Протокол Прийому Інженерного Брифу",
+    "onboardingBadge": "ОНБОРДИНГ",
+    "onboardingNotice": "Особу не знайдено в базі даних. Надішліть бриф нижче, щоб автоматично створити суверенний профіль клієнта.",
+    "nameLabel": "ПОВНЕ ІМ'Я / ОРГАНІЗАЦІЯ",
+    "contactLabel": "КОНТАКТ (TELEGRAM / EMAIL)",
+    "budgetLabel": "БЮДЖЕТ ПРОЄКТУ (USD)",
+    "descriptionLabel": "ТЕХНІЧНА СПЕЦИФІКАЦІЯ ТА БРИФ",
+    "serviceTypeLabel": "КОНТУР ОБСЛУГОВУВАННЯ",
+    "submitButton": "ПЕРЕДАТИ ІНЖЕНЕРНИЙ БРИФ →"
+  },
+  "clientHub": {
+    "viewportLabel": "ДИСПЕТЧЕР ЕКРАНА:",
+    "desktop": "Робочий простір Desktop",
+    "miniApp": "Telegram Mini App (Смартфон)",
+    "signOut": "Вийти ⎋",
+    "synced": "ВСІ СИСТЕМИ СИНХРОНІЗОВАНО"
+  },
+  "telemetry": {
+    "fpsLocked": "60 FPS ЗАФІКСОВАНО • BUN 1.4",
+    "statusLive": "ТЕЛЕМЕТРИЧНИЙ КАНАЛ АКТИВНИЙ [200 OK]",
+    "latencyMetric": "Затримка Edge-вузла <15мс",
+    "idempotencyHint": "Мутація захищена криптографічним ключем ідемпотентності"
+  }
+}

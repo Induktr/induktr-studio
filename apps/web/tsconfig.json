@@ -3,15 +3,47 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "types": ["vite/client"],
-    "baseUrl": ".",
+    "noEmit": true,
+    "types": [
+      "vite/client",
+      "node",
+      "bun",
+      "nuqs"
+    ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/entities": [
+        "./src/entities"
+      ],
+      "@/features": [
+        "./src/features"
+      ],
+      "@/pages": [
+        "./src/pages"
+      ],
+      "@/shared": [
+        "./src/shared"
+      ],
+      "@/widgets": [
+        "./src/widgets"
+      ],
+      "@/api": [
+        "/"
+      ],
+      "@/contracts": [
+        "/"
+      ]
     }
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*",
+    "@induktr/api",
+    "@induktr/contracts"
+  ]
 }

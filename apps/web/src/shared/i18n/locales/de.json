@@ -1,0 +1,65 @@
+{
+  "nav": {
+    "studio": "Studio",
+    "store": "Store",
+    "cases": "Cases",
+    "systems": "Systeme",
+    "knowledge": "Wissen",
+    "clientHub": "Client Hub",
+    "initialize": "INITIALISIEREN",
+    "activeIntake": "AKTIVER AUFTRAG",
+    "verified": "VERIFIZIERT",
+    "authRequired": "AUTHENTIFIZIERUNG ERFORDERLICH"
+  },
+  "hero": {
+    "tagline": "Autonome KI-Systeme & Hochverfügbare Infrastruktur",
+    "subtext": "Hochgeschwindigkeits-Agenten-Pipelines, deterministische Zustandssynchronisation und Edge-Webarchitektur mit Latenzen unter 15 ms. Null technische Schulden.",
+    "ctaPrimary": "Systemarchitektur Bereitstellen",
+    "ctaSecondary": "Systemtelemetrie Prüfen"
+  },
+  "auth": {
+    "sectionTag": "05 / IDENTITÄTSVERIFIZIERUNG & SICHERHEITSGATEWAY",
+    "title": "Souveräne Sitzung Etablieren",
+    "description": "Kryptografische Zero-Trust-Verifizierung über Telegram Mini App, Datenbankabgleich oder Unternehmensschlüssel.",
+    "methodTelegram": "Telegram HMAC",
+    "methodDb": "DB-Abgleich",
+    "methodDemo": "Founder Demo",
+    "methodToken": "Bearer Token",
+    "verifyInDb": "IN DATENBANK PRÜFEN →",
+    "dbExists": "BENUTZERDATENSATZ IN DATENBANK GEFUNDEN",
+    "dbNotFound": "DATENSATZ NICHT IN STUDIO-DATENBANK GEFUNDEN",
+    "dbQuerying": "POSTGRESQL-CLUSTER WIRD ABGEFRAGT // IDENTITÄT WIRD VERIFIZIERT...",
+    "tgHandshakeTitle": "Kryptografischer initData-Handshake",
+    "tgHandshakeDesc": "Authentifizierung über SHA-256 HMAC-Signaturprüfung mit offiziellem Induktr Studio Telegram-Bot. DSGVO-konform, passwortlos, biometriebereit.",
+    "tgButton": "ÜBER TELEGRAM AUTHENTIFIZIEREN ✈",
+    "demoFounder": "ALS ALEX MORGAN INITIALISIEREN (IN DB VORHANDEN) →",
+    "demoGuest": "UNREGISTRIERTEN BESUCHER TESTEN (ZU ONBOARDING) ↗",
+    "tokenLabel": "BEARER SITZUNGSTOKEN",
+    "tokenButton": "SITZUNGSTOKEN ANHÄNGEN →",
+    "footerSecurity": "HMAC-SHA256 • PASSWORTLOS • GÜLTIGKEIT: 30 TAGE"
+  },
+  "intake": {
+    "title": "Aufnahmeprotokoll für Entwicklungsbriefing",
+    "onboardingBadge": "ONBOARDING",
+    "onboardingNotice": "Identität in Datenbank nicht gefunden. Reichen Sie das Briefing ein, um Ihren Arbeitsbereich bereitzustellen.",
+    "nameLabel": "VOLLSTÄNDIGER NAME / UNTERNEHMEN",
+    "contactLabel": "KONTAKT (TELEGRAM / E-MAIL)",
+    "budgetLabel": "PROJEKTBUDGET (USD)",
+    "descriptionLabel": "TECHNISCHE SPEZIFIKATION & BRIEFING",
+    "serviceTypeLabel": "SERVICE-KONTUR",
+    "submitButton": "BRIEFING ÜBERMITTELN →"
+  },
+  "clientHub": {
+    "viewportLabel": "VIEWPORT-DISPATCH:",
+    "desktop": "Desktop-Arbeitsbereich",
+    "miniApp": "Telegram Mini App (Smartphone)",
+    "signOut": "Abmelden ⎋",
+    "synced": "ALLE SYSTEME SYNCHRONISIERT"
+  },
+  "telemetry": {
+    "fpsLocked": "60 FPS GESICHERT • BUN 1.4",
+    "statusLive": "TELEMETRIE-VERBINDUNG AKTIV [200 OK]",
+    "latencyMetric": "Sub-15ms Anycast-Edge-Latenz",
+    "idempotencyHint": "Mutation durch kryptografischen Idempotenz-Schlüssel gesichert"
+  }
+}

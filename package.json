@@ -3,10 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+<<<<<<< Updated upstream
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
+=======
+    "dev:web": "bun --filter @induktr/web dev",
+    "dev:api": "bun --filter @induktr/api dev",
+    "install:web": "bun install --filter @induktr/web",
+    "install:api": "bun install --filter @induktr/api",
+    "add:web": "bun add --filter @induktr/web",
+    "add:api": "bun add --filter @induktr/api",
+    "add:package": "bun add --filter @induktr/contracts",
+    "remove:web": "bun remove --filter @induktr/web",
+    "remove:api": "bun remove --filter @induktr/api",
+    "remove:package": "bun remove --filter @induktr/contracts",
+    "run:web": "bun run --filter @induktr/web dev",
+    "run:api": "bun run --filter @induktr/api dev",
+    "run:package": "bun run --filter @induktr/packages",
+    "build": "bun --filter \"*\" build",
+    "build:web": "bun --filter @induktr/web build",
+    "build:api": "bun --filter @induktr/api build",
+    "lint": "oxlint apps packages",
+    "lint:fix": "oxlint --fix apps packages",
+    "test": "vitest run",
+    "typecheck": "tsc --build"
+  },
+  "devDependencies": {
+    "oxlint": "^1.89.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+>>>>>>> Stashed changes
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

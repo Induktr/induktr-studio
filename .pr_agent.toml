@@ -1,0 +1,23 @@
+[config]
+model = "anthropic/claude-sonnet-5-5"
+fallback_models = ["anthropic/claude-haiku-5-5", "anthropic/claude-fable-5-2"]
+response_language = "en-US"
+
+[github_action_config]
+auto_review = true
+auto_describe = true
+auto_improve = false
+
+[pr_reviewer]
+extra_instructions = "Write and speak only in English. Adhere to strict engineering standards, web performance best practices, and clean architecture concepts (modularity, aggregation, immutability). Apply first principles to identify root causes and offer clear, actionable suggestions."
+require_score_review = true
+require_tests_review = true
+require_security_review = true
+
+[pr_description]
+publish_labels = true
+extra_instructions = "Categorize changes accurately following Conventional Commits format (feat, fix, refactor, docs, chore)."
+
+[pr_code_suggestions]
+num_code_suggestions = 4
+extra_instructions = "Focus on performance, algorithm correctness, edge cases, and type safety."
